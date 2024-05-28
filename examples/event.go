@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/PagerDuty/go-pagerduty"
 	"log"
+
+	"github.com/donallison/go-pagerduty"
 )
 
 func main() {

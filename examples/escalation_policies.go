@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/PagerDuty/go-pagerduty"
+	"github.com/donallison/go-pagerduty"
 )
 
 var (

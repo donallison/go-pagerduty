@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/PagerDuty/go-pagerduty"
+	"github.com/donallison/go-pagerduty"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/mitchellh/cli"
