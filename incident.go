@@ -3,6 +3,7 @@ package pagerduty
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/google/go-querystring/query"
 )
@@ -875,4 +876,37 @@ func (c *Client) RemoveIncidentNotificationSubscribersWithContext(ctx context.Co
 	}
 
 	return &result, nil
+}
+
+type CustomField struct {
+	ID          string `json:"id"`
+	Type        string `json:"type"`
+	Name        string `json:"name"`
+	DisplayName string `json:"display_name"`
+	Description string `json:"description"`
+	DataType    string `json:"data_type"`
+	FieldType   string `json:"field_type"`
+	Value       string `json:"value"`
+}
+
+// ListIncidentNotesWithContext lists existing notes for the specified incident.
+func (c *Client) ListIncidentCustomFieldsWithContext(ctx context.Context, id string) ([]CustomField, error) {
+	resp, err := c.get(ctx, "/incidents/"+id+"/custom_fields/values", nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var result map[string][]CustomField
+	if err := c.decodeJSON(resp, &result); err != nil {
+		return nil, err
+	}
+
+	log.Println(result)
+
+	fields, ok := result["custom_fields"]
+	if !ok {
+		return nil, fmt.Errorf("JSON response does not have field")
+	}
+
+	return fields, nil
 }
